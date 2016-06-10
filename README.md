@@ -1,3 +1,5 @@
+<p align="center"><a href="http://telerikacademy.com//"><img src="https://github.com/tddold/Telerik-Academy/blob/master/Programming%20with%20C%23/1.%20C%23%20Fundamentals%20I/Presentation/Telerik.png" /></a></p>
+
 # Object-Oriented-Programming-CSharp
 C# provides full support for object-oriented programming including encapsulation, inheritance, and polymorphism. Encapsulation means that a group of related properties, methods, and other members are treated as a single unit or object. Inheritance describes the ability to create new classes based on an existing class. Polymorphism means that you can have multiple classes that can be used interchangeably, even though each class implements the same properties or methods in different ways. 
 
