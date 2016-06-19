@@ -1,10 +1,11 @@
 <!-- section start -->
 <!-- attr: { class:'slide-title', showInPresentation:true, hasScriptWrapper:true } -->
-# Defining Classes – Part 1
-## Classes, Fields, Constructors, Methods, Properties
+# Defining Classes – Part 2
+## Static Members, Structures,Enumerations, Generic Classes, Namespaces
 
 
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic01.png" style="top:53.77%; left:64.56%; width:37.78%; z-index:-1" /> -->
+<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic03.png" style="top:65%; left:85%; width:17.08%; z-index:-1; border-radius:10px;" /> -->
+<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic04.png" style="top:60%; left:60%; width:22.96%; z-index:-1; border-radius:10px;" /> -->
 <div class="signature">
 	<p class="signature-course">C# OOP</p>
 	<p class="signature-initiative">Telerik Software Academy</p>
@@ -17,885 +18,831 @@
 <!-- section start -->
 <!-- attr: { showInPresentation:true, hasScriptWrapper:true } -->
 # Table of Contents
-- [Defining Simple Classes](#classes)
-- [Fields](#fields)
-- [Access Modifiers](#modifiers)
-- [Using Classes and Objects](#using)
-- [Constructors](#constructors)
-- [Methods](#methods)
-- [Properties](#property)
-- [Enumerations (Enums)](#enumerations)
-- [Keeping the Object State](#objectstate)
+- [Static Members](#static)
+- [Structures in C#](#structures)
+- [Generics](#generic)
+- [Namespaces](#namespace)
+- [Indexers](#index)
+- [Operators](#operator)
+- [Attributes](#attribute)
 
 
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic05.png" style="top:52%; left:70.17%; width:29.09%; z-index:-1" /> -->
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic06.png" style="top:14.10%; left:68.30%; width:33.23%; z-index:-1" /> -->
-
-
-
-
-<!-- section start -->
-<!-- attr: { class:'slide-section', showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Defining Simple Classes -->
-
-
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic07.png" style="top:42%; left:35%; width:30%; z-index:-1" /> -->
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# Classes in OOP
-- **Classes** model real-world objects and define
-  - **Attributes** (state, properties, fields)
-  - **Behavior** (methods, operations)
-- Classes describe the structure of objects
-  - Objects describe particular instance of a class
-- Properties hold information about the modeled object relevant to the problem
-- Operations implement object behavior
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# Classes in C\#
-- Classes in C# can have **members**:
-  - Fields, constants, methods, properties, indexers, events, operators, constructors, destructors, …
-  - Inner types (inner classes, structures, interfaces, delegates, ...)
-- Members can have access modifiers (scope)
-  - **public**, **private**, **protected**, **internal**
-- Members can be
-  - **static** (common) or **specific** for a given object
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:true } -->
-# Simple Class Definition
-
-```cs
-public class Cat : Animal {
-   private string name;
-   private string owner;
-
-   public Cat(string name, string owner)
-   {
-      this.name = name;
-      this.owner = owner;
-   }
-
-   public string Name
-   {
-      get { return this.name; }
-      set { this.name = value; }
-   }
-```
-
-<div class="fragment balloon" style="top:25%; left:58.31%; width:17.50%">Fields</div>
-<div class="fragment balloon" style="top:41%; left:50.82%; width:25.00%">Constructor</div>
-<div class="fragment balloon" style="top:58.01%; left:56.66%; width:19.16%">Property</div>
-<div class="fragment balloon" style="top:10.36%; left:20.28%; width:51.13%">Begin of class definition</div>
-<div class="fragment balloon" style="top:15%; left:44%; width:40.55%">Inherited (base) class</div>
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Simple Class Definition -->
-
-```cs
-   public string Owner
-   {
-      get { return this.owner; }
-      set { this.owner = value; }
-   }
-
-   public void SayMiau()
-   {
-      Console.WriteLine("Miauuuuuuu!");
-   }
-}
-```
-
-<div class="fragment balloon" style="top:41%; left:41%; width:19.28%">Method</div>
-<div class="fragment balloon" style="top:61.27%; left:12.34%; width:24.15%">End of class definition</div>
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic08.png" style="top:56.42%; left:66.43%; width:37.24%; z-index:0" /> -->
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:true } -->
-# Class Definition and Members
-- **Class definition** consists of:
-  - Class declaration
-  - Inherited class or implemented interfaces
-  - Fields (static or not)
-  - Constructors (static or not)
-  - Properties (static or not)
-  - Methods (static or not)
-  - Events, inner types, etc.
-
-
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic09.png" style="top:43.20%; left:71.04%; width:33.30%; z-index:-1" /> -->
+<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic05.png" style="top:41.43%; left:70.17%; width:20%; z-index:-1; border-radius:10px;" /> -->
+<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic06.png" style="top:15.06%; left:65.56%; width:25%; z-index:-1; border-radius:10px;" /> -->
 
 
 
 
 <!-- section start -->
 <!-- attr: { class:'slide-section', showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Fields
-## Defining and Using Data Fields -->
+<!-- # Static Members
+## Static vs. Instance Members -->
 
 
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic10.png" style="top:52%; left:18%; width:65%; z-index:-1" /> -->
+<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic07.png" style="top:55%; left:42%; width:20%; z-index:-1; border-radius:10px;; border-radius:10px" /> -->
+
+
+<!-- attr: { id:'static', showInPresentation:true, hasScriptWrapper:true } -->
+# <a id="static"></a>Static Members
+- Static members are associated with a type rather than with an instance
+  - Defined with the modifier `static`
+- Static can be used for
+  - `Fields`
+  - `Properties`
+  - `Methods`
+  - `Events`
+  - `Constructors`
+
+
+<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic08.png" style="top:42.31%; left:75%; width:25%; z-index:-1; border-radius:10px;" /> -->
+
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
+# Static vs. Non-Static
+- **Static**:
+  - Associated with a type, not with an instance
+- **Non-Static**:
+  - The opposite, associated with an instance
+- **Static**:
+  - Initialized just before the type is used for the first time
+- **Non-Static**:
+  - Initialized when the constructor is called
 
 
 <!-- attr: { showInPresentation:true, hasScriptWrapper:true } -->
-# Fields
-- Fields are **data members**defined inside a class
-  - Fields hold the internal object state
-  - Can be **static** or per instance
-  - Can be **private** / **public** / **protected** / …
+# Static Members – _Example_
 
 ```cs
-class Dog
+static class SqrtPrecalculated
 {
-   private string name;
-   private string breed;
-   private int age;
-   protected Color color;
+   public const int MAX_VALUE = 10000;
+
+   // Static field
+   private static int[] sqrtValues;
+
+   // Static constructor
+   static SqrtPrecalculated()
+   {
+      sqrtValues = new int[MAX_VALUE + 1];
+      for (int i = 0; i < sqrtValues.Length; i++)
+      {
+         sqrtValues[i] = (int)Math.Sqrt(i);
+      }
+   }
+```
+_(example continues)_
+
+
+
+<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic09.png" style="top:10.80%; left:80%; width:21.32%; z-index:0" /> -->
+
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:true } -->
+<!-- # Static Members – _Example_ -->
+
+```cs
+   // Static method
+   public static int GetSqrt(int value)
+   {
+      return sqrtValues[value];
+   }
+}
+
+class SqrtTest
+{
+   static void Main()
+   {
+	    Console.WriteLine(
+         SqrtPrecalculated.GetSqrt(254));
+      // Result: 15
+   }
 }
 ```
 
-<div class="fragment balloon" style="top:51.73%; left:60.83%; width:26.45%">Field declarations</div>
+<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic10.png" style="top:13.22%; left:79.64%; width:20%; z-index:0; border-radius:10px;" /> -->
+
+
+<!-- attr: { class:'slide-section demo', showInPresentation:true, hasScriptWrapper:true } -->
+<!-- # Static Members
+## [Demo](https://github.com/TelerikAcademy/Object-Oriented-Programming/tree/master/Topics/02.%20Defining-Classes-Part-2/demos/StaticMembers) -->
+
+
+<!-- section start -->
+<!-- attr: { id:'structures', class:'slide-section', showInPresentation:true, hasScriptWrapper:true } -->
+<!-- # <a id="structures"></a>C# Structures -->
+
+
+<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic12.png" style="top:42%; left:38%; width:25%; z-index:-1; border-radius:10px;" /> -->
 
 
 <!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# Constant Fields
-- **Constant fields** are of two types:
-  - Compile-time constants – **const**
-    - Replaced by their value during the compilation
-    - Can contain only values, known at compile time
-  - Runtime constants – **readonly**
-    - Assigned once only at object creation
-    - Can contain values, calculated run time
+# C# Structures
+- What is a `structure` in C#?
+  - A **value data type** (behaves like a primitive type)
+    - _Examples_ of structures: `int`, `double`, `DateTime`
+    - Classes are reference types
+  - Declared by the keyword `struct`
+  - Structures, like classes, have properties, methods, fields, constructors, events, …
+  - **Always have a parameterless constructor**
+    - It cannot be removed
+  - Mostly used to store data (bunch of fields)
+
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
+# C# Structures – _Example_
 
 ```cs
-class Math
+struct Point
 {
-   public const float PI = 3.14159;
-   public readonly Color =
-      Color.FromRGBA(25, 33, 74, 128);
+   public int X { get; set; }
+   public int Y { get; set; }
+}
+
+struct Color
+{
+   public byte RedValue { get; set; }
+   public byte GreenValue { get; set; }
+   public byte BlueValue { get; set; }
+}
+
+enum Edges { Straight, Rounded }
+```
+
+_(example continues)_
+
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
+<!-- # C# Structures – _Example_ -->
+
+```cs
+struct Square
+{
+   public Point Location { get; set; }
+   public int Size { get; set; }
+   public Color SurfaceColor { get; set; }
+   public Color BorderColor { get; set; }
+   public Edges Edges { get; set; }
+   public Square(Point location, int size,
+     Color surfaceColor, Color borderColor,
+     Edges edges) : this()
+   {
+      this.Location = location;
+      this.Size = size;
+      this.SurfaceColor = surfaceColor;
+      this.BorderColor = borderColor;
+      this.Edges = edges;
+   }
 }
 ```
 
 
 
-<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# Constant Fields – _Example_
+<!-- attr: { class:'slide-section demo', showInPresentation:true, hasScriptWrapper:true } -->
+<!-- # C# Structures
+## [Demo](https://github.com/TelerikAcademy/Object-Oriented-Programming/tree/master/Topics/02.%20Defining-Classes-Part-2/demos/Structures) -->
+
+
+<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic13.png" style="top:55%; left:38%; width:25%; z-index:-1; border-radius:50px; border: 2px solid white;" /> -->
+
+
+
+
+<!-- section start -->
+<!-- attr: { class:'slide-section', showInPresentation:true, hasScriptWrapper:true } -->
+<!-- # Generic Classes -->
+
+
+<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic15.png" style="top:42%; left:35%; width:33.46%; z-index:-1; border-radius:10px;" /> -->
+
+
+<!-- attr: { id:'generic', showInPresentation:true, hasScriptWrapper:true } -->
+# <a id="generic"></a>What are Generics?
+- **Generics** allow defining parameterized classes that process data of unknown (generic) type
+  - The class can be instantiated (specialized) with different particular types
+  - _Example_: <code>List&lt;T&gt; &rarr; List&lt;int&gt; / List&lt;string&gt; / List&lt;Student&gt;</code>
+- Generics are also known as "**parameterized types**" or "**template types**"
+  - Similar to the templates in C++
+  - Similar to the generics in Java
+
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:true } -->
+# Generics – _Example_
 
 ```cs
-public class Constants
+public class GenericList<T>
 {
-  public const double PI = 3.1415926535897932385;
-  public readonly double Size;
-  public Constants(int size)
-  {
-    this.Size = size; // Cannot be further modified!
-  }
+  public void Add(T element) { … }
+}
+class GenericList_Example_
+{
   static void Main()
   {
-    Console.WriteLine(Constants.PI);
-    Constants c = new Constants(5);
-    Console.WriteLine(c.Size);
-    c.Size = 10; // Compilation error: readonly field
-    Console.WriteLine(Constants.Size); // compile error
+    // Declare a list of type int
+    GenericList<int> intList =
+      new GenericList<int>();
+    // Declare a list of type string
+    GenericList<string> stringList =
+      new GenericList<string>();
   }
+}
+```
+
+<div class="fragment balloon" style="top:15%; left:45%; width:39.89%">**T** is an unknown type, parameter of the class</div>
+<div class="fragment balloon" style="top:28.07%; left:52.63%; width:39.89%">**T** can be used in any method in the class</div>
+<div class="fragment balloon" style="top:50%; left:50%; width:31.75%">**T** can be replaced with **int** during the instantiation</div>
+
+
+<!-- attr: { class:'slide-section demo', showInPresentation:true, hasScriptWrapper:true } -->
+<!-- # Generic Classes -->
+
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
+# Defining Generic Classes
+- Generic class declaration:
+
+```cs
+class MyClass <type-parameter-list> : class-base
+where <type-parameter-constraints-clauses>
+{
+  // Class body
+}
+```
+
+- _Example_:
+
+
+```cs
+class MyClass<T> : BaseClass
+where T : new()
+{
+  // Class body
 }
 ```
 
 
 
-
-
-<!-- section start -->
-<!-- attr: { class:'slide-section', showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Access Modifiers
-## Public, Private, Protected, Internal -->
-
-
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic12.png" style="top:54%; left:34%; width:35%; z-index:-1" /> -->
-
-
 <!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# Access Modifiers
-- Class members can have access modifiers
-  - Restrict the access to them from outer sources
-  - Supports the OOP principle "**encapsulation**"
-- Class members can be:
-  - **public** – accessible from any class
-  - **protected** – accessible from the class itself and all its descendent classes
-  - **private** – accessible from the class itself only
-  - **internal** (default) – accessible from the current assembly, i.e. the current VS project
+# Generic Constraints Syntax
+- Parameter constraints clause:
 
+```cs
+public SomeGenericClass<some parameters>
+where type-parameter : primary-constraint,
+	secondary-constraints,
+	constructor-constraint
+```
 
-<!-- attr: { showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Access Modifiers Explained -->
-
-
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic13.png" style="top:14%; left:75.17%; width:27.33%; z-index:-1" /> -->
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic14.png" style="top:14%; left:41%; width:26.45%; z-index:-1" /> -->
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic15.png" style="top:37.94%; left:75%; width:29.09%; z-index:-1" /> -->
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic16.png" style="top:38.35%; left:5.91%; width:27.33%; z-index:-1" /> -->
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic17.png" style="top:13.99%; left:5.91%; width:27.33%; z-index:-1" /> -->
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# The 'this' Keyword
-- The keyword **this** inside a method points to the current instance of the class
 - _Example_:
 
 ```cs
-class Dog
+public class MyClass<T>
+where T: class, IEnumerable<T>, new()
+{…}
+```
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
+# Generic Constraints
+- Primary constraint:
+  - `class` (reference type parameters)
+  - `struct` (value type parameters)
+- Secondary constraints:
+  - Interface derivation
+  - Base class derivation
+- Constructor constraint:
+  - `new()` – parameterless constructor constraint
+
+
+<!-- attr: { class:'slide-section demo', showInPresentation:true, hasScriptWrapper:true } -->
+<!-- # Generic Constraints
+## [Demo](https://github.com/TelerikAcademy/Object-Oriented-Programming/tree/master/Topics/02.%20Defining-Classes-Part-2/demos/Generic-Constraints) -->
+
+
+
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
+# Generic Method – _Example_
+
+```cs
+public static T Min<T>(T first, T second)
+    where T : IComparable<T>
 {
-   private string name;
-
-   public void PrintName()
-   {
-      Console.WriteLine(this.name);
-      // The same like Console.WriteLine(name);
-   }
+    if (first.CompareTo(second) <= 0)
+       return first;
+    else
+       return second;
 }
-```
-
-
-
-
-
-<!-- section start -->
-<!-- attr: { class:'slide-section', showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Defining Simple Classes
-## _Example_ -->
-
-
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic18.png" style="top:52%; left:33%; width:35%; z-index:-1" /> -->
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# Task: Define a Class "Dog"
-- Our task is to define a simple class that represents information about a **dog**
-  - The dog should have **name** and **breed**
-    - Optional fields (could be **null**)
-  - The class allows to **view** and **modify** the name and the breed at any time
-  - The dog should be able to **bark**
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:true } -->
-# Defining Class Dog – _Example_
-
-```cs
-public class Dog{
-   private string name;
-   private string breed;
-
-   public Dog()
-   {
-   }
-
-   public Dog(string name, string breed)
-   {
-      this.name = name;
-      this.breed = breed;
-   }
-
-```
-_(the example continues)_
-
-
-
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic19.png" style="top:15.48%; left:82.34%; width:18.95%; z-index:0" /> -->
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Defining Class Dog – _Example_ -->
-
-```cs
-   public string Name
-   {
-      get { return this.name; }
-      set { this.name = value; }
-   }
-
-   public string Breed
-   {
-      get { return this.breed; }
-      set { this.breed = value; }
-   }
-
-   public void SayBau()
-   {
-      Console.WriteLine("{0} said: Bauuuuuu!",
-         this.name ?? "[unnamed dog]");
-   }
-}
-```
-
-
-
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic20.png" style="top:14.99%; left:86.08%; width:15.80%; z-index:0" /> -->
-
-
-
-
-<!-- section start -->
-<!-- attr: { class:'slide-section', showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Using Classes and Objects -->
-
-
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic21.png" style="top:42%; left:29.89%; width:49.41%; z-index:-1" /> -->
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:true } -->
-# How to Use Classes <br />(Non-Static)?
-- Create an **instance**
-  - Initialize its properties / fields
-- Manipulate the instance
-  - Read / modify its properties
-  - Invoke methods
-  - Handle events
-- Release the occupied resources
-  - Performed automatically in most cases
-
-
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic22.png" style="top:45%; left:74%; width:25.70%; z-index:-1" /> -->
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic23.png" style="top:20%; left:74%; width:26.45%; z-index:-1" /> -->
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# Task: Dog Meeting
-- Our task is as follows:
-  - Create 3 dogs
-    - The first should be named “Sharo”, the second – “Rex” and the last – left without name
-  - Put all dogs in an array
-  - Iterate through the array elements and ask each dog to bark
-  - _Note_:
-    - Use the **Dog** class from the previous example!
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# Dog Meeting – _Example_
-
-```cs
 static void Main()
 {
-   Console.Write("Enter first dog's name: ");
-   string dogName = Console.ReadLine();
-   Console.Write("Enter first dog's breed: ");
-   string dogBreed = Console.ReadLine();
-   // Use the Dog constructor to assign name and breed
-   Dog firstDog = new Dog(dogName, dogBreed);
-   // Use Dog's parameterless constructor
-   Dog secondDog = new Dog();
-   // Use properties to assign name and breed
-   Console.Write("Enter second dog's name: ");
-   secondDog.Name = Console.ReadLine();
-   Console.Write("Enter second dog's breed: ");
-   secondDog.Breed = Console.ReadLine();
-```
-_(the example continues)_
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-<!-- # Dog Meeting – _Example_ -->
-
-```cs
-  // Create a Dog with no name and breed
-  Dog thirdDog = new Dog();
-
-  // Save the dogs in an array
-  Dog[] dogs = new Dog[] {
-    firstDog, secondDog, thirdDog };
-
-  // Ask each of the dogs to bark
-  foreach(Dog dog in dogs)
-  {
-	  dog.SayBau();
-  }
+    int i = 5;
+    int j = 7;
+    int min = Min<int>(i, j);
 }
 ```
 
 
 
 <!-- attr: { class:'slide-section demo', showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Dog Meeting
-## [Demo](https://github.com/TelerikAcademy/Object-Oriented-Programming/tree/master/Topics/01.%20Defining-Classes-Part-1/demos/DogMeeting) -->
-
-
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic24.png" style="top:52%; left:32.25%; width:35%; z-index:-1" /> -->
-
+<!-- # Generic Methods
+## [Demo](https://github.com/TelerikAcademy/Object-Oriented-Programming/tree/master/Topics/02.%20Defining-Classes-Part-2/demos/Generic-Methods) -->
 
 
 
 <!-- section start -->
 <!-- attr: { class:'slide-section', showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Constructors -->
+<!-- # Namespaces -->
+
+<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic22.png" style="top:45%; left:37%; width:25%; z-index:-1; border-radius:10px;" /> -->
 
 
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic25.png" style="top:42%; left:28%; width:44.80%; z-index:-1" /> -->
+<!-- attr: { id:'namespace', showInPresentation:true, hasScriptWrapper:false } -->
+# <a id="namespace"></a>Namespaces
+- `Namespaces` logically group type definitions
+  - May contain classes, structures, interfaces, enumerators and other types and namespaces
+  - Can not contain methods and data directly
+  - Can be allocated in one or several files
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
+<!-- # Namespaces -->
+- `Namespaces` in .NET are similar to namespaces in C++ and packages in Java
+- Allows definition of types with duplicated names
+  - E.g. a type named **Button** is found in Windows Forms, in WPF and in ASP.NET Web Forms
 
 
 <!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# What is Constructor?
-- **Constructors** are special methods
-  - Invoked at the time of **creating a new instance** of an object
-  - Used to initialize the fields of the instance
-- Constructors has the same name as the class
-  - Have no return type
-  - Can have parameters
-  - Can be **private**, **protected**, **internal**, **public**
+# Including Namespaces
+- Including a namespace
+  - The `using` directive is put at the start of the file
 
+  ```cs
+  using System.Windows.Forms;
+  ```
 
-<!-- attr: { showInPresentation:true, hasScriptWrapper:true } -->
-# Defining Constructors
-
-```cs
-public class Point
-{
-   private int xCoord;
-   private int yCoord;
-
-   // Simple parameterless constructor
-   public Point()
-   {
-      this.xCoord = 0;
-      this.yCoord = 0;
-   }
-
-   // More code …
-}
-```
-
-- Class **Point** with parameterless constructor:
-
-
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic26.png" style="top:20.28%; left:85.14%; width:18.76%; z-index:0" /> -->
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Defining Constructors -->
-
-```cs
-public class Person
-{
-    private string name;
-    private int age;
-    // Parameterless constructor
-    public Person()
-    {
-        this.name = null;
-        this.age = 0;
-    }
-    // Constructor with parameters
-    public Person(string name, int age)
-    {
-        this.name = name;
-        this.age = age;
-    }
-    // More code …
-}
-```
-
-<div class="fragment balloon" style="top:59.88%; left:55.54%; width:39.67%">As rule constructors should initialize all own class fields.</div>
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic27.png" style="top:14.70%; left:75.79%; width:24.09%; z-index:0" /> -->
+  - `using` allows direct use of all types in the namespace
+  - Including is applied to the current file
+  - The directive is written at the beginning of the file
+  - When includes a namespace with `using` its subset of namespaces is not included
 
 
 <!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# Constructors and Initialization
-- Pay attention when using inline initialization!
+<!-- # Including Namespaces -->
+- Types, placed in namespaces, can be used and without `using` directive, by their full name:
 
 ```cs
-public class AlarmClock
+System.IO.StreamReader reader =
+    System.IO.File.OpenText("file.txt");
+```
+
+- `using` can create alias for namespaces :
+
+```cs
+using IO = System.IO;
+using WinForms = System.Windows.Forms;
+IO.StreamReader reader =
+    IO.File.OpenText("file.txt");
+WinForms.Form form = new WinForms.Form();
+```
+
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
+# Defining Namespaces
+- **Divide** the types in your applications into namespaces
+  - When the types are too much (more than 15-20)
+  - Group the types logically in namespaces according to their purpose
+- Use **nested namespaces** when the types are too much
+  - E.g. for Tetris game you may have the following namespaces: **Tetris.Core**, **Tetris.Web**, **Tetris.Win8**, **Tetris.HTML5Client**
+
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
+<!-- # Defining Namespaces -->
+- Distribute all public types in files identical with their names
+  - E.g. the class **Student** should be in the file **Student.cs**
+- Arrange the files in directories, corresponding to their namespaces
+  - The directory structure from your project course-code have to reflect the structure of the defined namespaces
+
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
+# Namespaces – _Example_
+
+```cs
+namespace SofiaUniversity.Data
 {
-   private int hours = 9; // Inline initialization
-   private int minutes = 0; // Inline initialization
-   // Parameterless constructor (intentionally left empty)
-   public AlarmClock()
-   { }
-   // Constructor with parameters
-   public AlarmClock(int hours, int minutes)
-   {
-          this.hours = hours;      // Invoked after the inline
-          this.minutes = minutes;  // initialization!
-   }
-   // More code …
+    public struct Faculty
+    {
+        // …
+    }
+    public class Student
+    {
+        // …
+    }
+    public class Professor
+    {
+        // …
+    }
+    public enum Specialty
+    {
+        // …
+    }
+}
+```
+
+
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:false, style:'font-size: 40px;' } -->
+<!-- # Namespaces – _Example_ -->
+
+```cs
+namespace SofiaUniversity.UI
+{
+    public class StudentAdminForm : System.Windows.Forms.Form
+    {
+        // …
+    }
+    public class ProfessorAdminForm : System.Windows.Forms.Form
+    {
+        // …
+    }
+}
+namespace SofiaUniversity
+{
+    public class AdministrationSystem
+    {
+        public static void Main()
+        {
+             // …
+        }
+    }
 }
 ```
 
 
 
 <!-- attr: { showInPresentation:true, hasScriptWrapper:true } -->
-# Chaining Constructors Calls
-- Reusing constructors (chaining)
-
-```cs
-public class Point
-{
-    private int xCoord;
-    private int yCoord;
-
-    public Point() : this(0, 0) // Reuse the constructor
-    {
-    }
-
-    public Point(int xCoord, int yCoord)
-    {
-        this.xCoord = xCoord;
-        this.yCoord = yCoord;
-    }
-
-    // More code …
-}
-```
+<!-- # Namespaces – _Example_ -->
+- Recommended directory structure and classes organization in them
 
 
-
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic28.png" style="top:50.25%; left:88.89%; width:14.99%; z-index:0" /> -->
+<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic23.png" style="top:30%; left:25.18%; width:53.33%; z-index:-1; border-radius:10px;; background-color: white;" /> -->
 
 
 <!-- attr: { class:'slide-section demo', showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Constructors
-## [Demo](https://github.com/TelerikAcademy/Object-Oriented-Programming/tree/master/Topics/01.%20Defining-Classes-Part-1/demos/Constructors) -->
-
-
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic29.png" style="top:52%; left:36.44%; width:30%; z-index:-1" /> -->
+<!-- # Namespaces
+## [Demo](https://github.com/TelerikAcademy/Object-Oriented-Programming/tree/master/Topics/02.%20Defining-Classes-Part-2/demos/Namespaces) -->
 
 
 
 
 <!-- section start -->
 <!-- attr: { class:'slide-section', showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Methods
-## Defining and Invoking Methods -->
+<!-- # Indexers -->
 
 
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic30.png" style="top:52%; left:59.88%; width:31.74%; z-index:-1" /> -->
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic31.png" style="top:52%; left:19.65%; width:29.09%; z-index:-1" /> -->
+<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic26.png" style="top:42%; left:32%; width:35%; z-index:-1; border-radius:10px;" /> -->
 
 
-<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# Methods
-- **Methods** are class members that execute some action (some code, some algorithm)
-  - Could be **static** / per instance
-  - Could be **public** / **private** / **protected** / …
+<!-- attr: { id:'index', showInPresentation:true, hasScriptWrapper:false, style:' font-size: 0.9em;' } -->
+# <a id="index"></a>Indexers
+- `Indexers` provide indexed access class data
+  - Predefine the `[]` operator for certain type
+    - Like when accessing array elements
 
 ```cs
-public class Point
-{
-  private int xCoord;
-  private int yCoord;
-  public double CalcDistance(Point p)
-  {
-    return Math.Sqrt(
-      (p.xCoord - this.xCoord) * (p.xCoord - this.xCoord) +
-      (p.yCoord - this.yCoord) * (p.yCoord - this.yCoord));
-  }
-}
+IndexedType t = new IndexedType(50);
+int i = t[5];
+t[0] = 42;
+```
+
+  - Can accept one or multiple parameters
+
+```cs
+personInfo["Nikolay Kostov", 25]
+```
+
+  - Defining an indexer:
+
+```cs
+public int this [int index] { … }
 ```
 
 
 
-<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# Using Methods
-- Invoking instance methods is done through the object (class instance):
+<!-- attr: { showInPresentation:true, hasScriptWrapper:true} -->
+# Indexers – _Example_
 
 ```cs
-class TestMethods
+struct BitArray32
 {
-  static void Main()
-  {
-    Point p1 = new Point(2, 3);
-    Point p2 = new Point(3, 4);
-    System.Console.WriteLine(p1.CalcDistance(p2));
-	}
-}
-```
-
-
-
-<!-- attr: { class:'slide-section demo', showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Methods
-## [Demo](https://github.com/TelerikAcademy/Object-Oriented-Programming/tree/master/Topics/01.%20Defining-Classes-Part-1/demos/Methods) -->
-
-<!-- section start -->
-<!-- attr: { class:'slide-section', showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Properties
-## Defining and Using Properties -->
-
-
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic34.png" style="top:52%; left:28%; width:42.57%; z-index:-1" /> -->
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# The Role of Properties
-- **Properties** expose object's data to the world
-  - Control how the data is manipulated
-    - Ensure the internal object state is correct
-    - E.g. price should always be kept positive
-- **Properties** can be:
-  - Read-only
-  - Write-only ([examples](http://stackoverflow.com/q/2213879/1862812))
-  - Read and write
-- Simplify the writing of code
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# Defining Properties
-- Properties work as a pair of methods
-  - **Getter** and **setter**
-- Properties should have:
-  - Access modifier (**public**, **protected**, etc.)
-  - Return type
-  - Unique name
-  - **Get** and / or **Set** part
-  - Can contain code processing data in specific way, e.g. apply validation
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:true } -->
-# Defining Properties – _Example_
-
-```cs
-public class Point
-{
-    private int xCoord;
-    private int yCoord;
-
-    public int XCoord  
+    private uint value;
+    // Indexer declaration
+    public int this [int index]
     {
-        get { return this.xCoord; }
-            set { this.xCoord = value; }
-    }
-
-    public int YCoord
-    {
-        get { return this.yCoord; }
-            set { this.yCoord = value; }
-    }
-
-    // More code ...
-}
-```
-
-
-
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic35.png" style="top:12.34%; left:74.68%; width:28.98%; z-index:0" /> -->
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# Dynamic Properties
-- Properties are not obligatory bound to a class field – can be calculated dynamically:
-
-```cs
-public class Rectangle
-{
-    private double width;
-    private double height;
-
-    // More code …
-
-    public double Area
-    {
- 	      get
+        get
+        {
+            if (index >= 0 && index <= 31)
             {
-                return width * height;
+                // Check the bit at position index
+                if ((value & (1 << index)) == 0)
+                   return 0;
+                else
+		     return 1;
             }
-    }
-}
 ```
 
+_(the example continues)_
 
 
-<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# Automatic Properties
-- Properties could be defined without an underlying field behind them
-  - It is automatically created by the compiler
+<!-- attr: { showInPresentation:true, hasScriptWrapper:false, style:'font-size: 0.9em;'  } -->
+<!-- # Indexers – _Example_ -->
 
 ```cs
-class UserProfile
-{
-    public int UserId { get; set; }
-    public string FirstName { get; set; }
-    public string LastName { get; set; }
+    else
+    {
+        throw new IndexOutOfRangeException(
+        String.Format("Index {0} is invalid!", index));
+    }
 }
-…
-UserProfile profile = new UserProfile() {
-    FirstName = "Steve",
-    LastName = "Balmer",
-    UserId = 91112
-};
+set
+{
+    if (index < 0 || index > 31)
+        throw new IndexOutOfRangeException(
+         String.Format("Index {0} is invalid!", index));
+    if (value < 0 || value > 1)
+        throw new ArgumentException(
+         String.Format("Value {0} is invalid!", value));       
+    // Clear the bit at position index
+    value &= ~((uint)(1 << index));
+    // Set the bit at position index to value
+    value |= (uint)(value << index);
+}
 ```
 
 
 
 <!-- attr: { class:'slide-section demo', showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Properties
-## [Demo](https://github.com/TelerikAcademy/Object-Oriented-Programming/tree/master/Topics/01.%20Defining-Classes-Part-1/demos/Defining-Properties) -->
-
-
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic36.png" style="top:52%; left:32%; width:36.87%; z-index:-1" /> -->
-
-
-
+<!-- # Indexers
+## [Demo](https://github.com/TelerikAcademy/Object-Oriented-Programming/tree/master/Topics/02.%20Defining-Classes-Part-2/demos/Indexers) -->
 
 <!-- section start -->
 <!-- attr: { class:'slide-section', showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Enumerations -->
+<!-- # Operators Overloading -->
 
 
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic37.png" style="top:42%; left:10.36%; width:83.92%; z-index:-1" /> -->
+<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic29.png" style="top:42%; left:37%; width:25%; z-index:-1; border-radius:10px;" /> -->
 
 
-<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# Enumerations in C#
-- **Enumerations** are types that hold a value from a fixed set of named constants
-  - Declared by **enum** keyword in C#
+<!-- attr: { id:'operator', showInPresentation:true, hasScriptWrapper:false } -->
+# <a id="operator"></a>Overloading Operators
+- In C# some operators can be **overloaded**(**redefined**) by developers
+  - The priority of operators can not be changed
+  - Not all operators can be overloaded
+- Overloading an operator in C#
+  - Looks like a static method with 2 operands:
 
 ```cs
-public enum DayOfWeek
+public static Matrix operator *(Matrix m1, Matrix m2)
 {
-  Mon, Tue, Wed, Thu, Fri, Sat, Sun
-}
-class Enum_Example_
-{
-  static void Main()
-  {
-    DayOfWeek day = DayOfWeek.Wed;
-    Console.WriteLine(day); // Wed
-  }
+    return new m1.Multiply(m2);
 }
 ```
 
 
 
 <!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# Enumerations – _Example_
+<!-- # Overloading Operators -->
+- Overloading is allowed on:
+  - Unary operators
 
 ```cs
-public enum CoffeeSize
++, -, !, ~, ++, --, true and false
+```
+
+- Binary  operators
+
+```cs
++, -, *, /, %, &, |, ^, <<, >>, ==, !=, >, <, >= and <=
+```
+
+- Operators for type conversion
+  - Implicit type conversion
+  - Explicit type conversion `(type)`
+
+
+
+
+
+
+
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
+# Overloading Operators – _Example_
+
+```cs
+public static Fraction operator -(Fraction f1,Fraction f2)
 {
-  Small = 100, Normal = 150, Double = 300
+    long num = f1.numerator * f2.denominator -
+    f2.numerator * f1.denominator;
+    long denom = f1.denominator * f2.denominator;
+    return new Fraction(num, denom);
 }
-public class Coffee
+public static Fraction operator *(Fraction f1,Fraction f2)
 {
-  private CoffeeSize size;
-  public Coffee(CoffeeSize size)
-  {
-    this.size = size;
-  }
-  public CoffeeSize Size
-  {
-    get { return this.size; }
-  }
+    long num = f1.numerator * f2.numerator;
+    long denom = f1.denominator * f2.denominator;
+    return new Fraction(num, denom);
 }
 ```
 
 _(the example continues)_
 
 
+
 <!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-<!-- # Enumerations – _Example_ -->
+<!-- # Overloading Operators – _Example_ -->
 
 ```cs
-public class CoffeeMachine
+// Unary minus operator
+public static Fraction operator -(Fraction fraction)
 {
-  static void Main()
-  {
-    Coffee normalCoffee = new Coffee(CoffeeSize.Normal);
-    Coffee doubleCoffee = new Coffee(CoffeeSize.Double);
-
-    Console.WriteLine("The {0} coffee is {1} ml.",
-      normalCoffee.Size, (int)normalCoffee.Size);
-    // The Normal coffee is 150 ml.
-
-    Console.WriteLine("The {0} coffee is {1} ml.",
-      doubleCoffee.Size, (int)doubleCoffee.Size);
-    // The Double coffee is 300 ml.
-	}
+    long num = -fraction.numerator;
+    long denom = fraction.denominator;
+    return new Fraction(num, denom);
 }
+// Operator ++ (the same for prefix and postfix form)
+public static Fraction operator ++(Fraction fraction)
+{
+    long num = fraction.numerator + fraction.denominator;
+    long denom = Frac.denominator;
+    return new Fraction(num, denom);
+}				
 ```
 
 
 
 <!-- attr: { class:'slide-section demo', showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Enumerations
-## [Demo](https://github.com/TelerikAcademy/Object-Oriented-Programming/tree/master/Topics/01.%20Defining-Classes-Part-1/demos/Enums) -->
+<!-- # Overloading Operators
+## [Demo](https://github.com/TelerikAcademy/Object-Oriented-Programming/tree/master/Topics/02.%20Defining-Classes-Part-2/demos/Overloading-Operators) -->
 
 
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic38.png" style="top:52%; left:33%; width:35%; z-index:-1" /> -->
+<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic30.png" style="top:55%; left:30%; width:40%; z-index:-1; border-radius:10px;" /> -->
 
 
 
 
 <!-- section start -->
 <!-- attr: { class:'slide-section', showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Keeping the Object State Correct -->
+<!-- # Attributes
+## Applying Attributes to Code Elements -->
 
 
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic39.png" style="top:52%; left:55.79%; width:30%; z-index:-1" /> -->
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic40.png" style="top:52%; left:21.28%; width:28.21%; z-index:-1" /> -->
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic41.png" style="top:52%; left:13.10%; width:25.93%; z-index:-1" /> -->
+<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic32.png" style="top:55%; left:39%; width:22%; z-index:-1; border-radius:10px;" /> -->
+
+
+<!-- attr: { id:'attribute', showInPresentation:true, hasScriptWrapper:false} -->
+# <a id="attribute"></a>What are Attributes?
+- .NET `attributes` are:
+  - Declarative tags for attaching descriptive information in the declarations in the code
+  - Saved in the assembly at compile time
+    - Objects derived from `System.Attribute`
+  - Can be accessed at runtime (through **reflection**) and manipulated by many tools
+- Developers can define custom attributes
+
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:false, style:'font-size:0.9em'  } -->
+# Applying Attributes – _Example_
+- Attribute\`s name is surrounded by square brackets `[]`
+  - Placed before their target declaration
+
+  ```cs
+  [Flags] // System.FlagsAttribute
+  public enum FileAccess
+  {
+      Read = 1,
+      Write = 2,
+      ReadWrite = Read | Write
+  }
+  ```
+
+- `[Flags]` attribute indicates that the enum type can be treated like a set of bit flags
+
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:true, style:'font-size:0.9em'  } -->
+<!-- # Attributes with Parameters -->
+- Attributes can accept parameters for their constructors and public properties
+
+```cs
+[DllImport("user32.dll", EntryPoint="MessageBox")]
+public static extern int ShowMessageBox(int hWnd,
+    string text, string caption, int type);
+…
+ShowMessageBox(0, "Some text", "Some caption", 0);
+```
+
+- The `[DllImport]` attribute refers to:
+  - `System.Runtime.InteropServices.DllImportAttribute`
+  - "**user32.dll**" is passed to the constructor
+  - "**MessageBox**" value is assigned to **EntryPoint**
 
 
 <!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
-# Keep the Object State Correct
-- Constructors and properties can **keep the object's state correct**
-  - This is known as **encapsulation** in OOP
-  - Can force **validation** when creating / modifying the object's internal state
-  - Constructors define which properties are mandatory and which are optional
-  - Property setters should validate the new value before saving it in the object field
-  - Invalid values should cause an exception
-
-
-<!-- attr: { showInPresentation:true, hasScriptWrapper:true, style:'font-size: 40px;' } -->
-# Keep the Object State – _Example_
+# Set a Target to an Attribute
+- Attributes can specify its target declaration:
 
 ```cs
-public class Person
+// target "assembly"
+[assembly: AssemblyTitle("Attributes Demo")]
+[assembly: AssemblyCompany("DemoSoft")]
+[assembly: AssemblyProduct("Entreprise Demo Suite")]
+[assembly: AssemblyVersion("2.0.1.37")]
+[Serializable] // [type: Serializable]
+class TestClass
 {
-   private string name;
-   public Person(string name)
-   {
-      this.Name = name;
-   }
-   public string Name
-   {
-      get { return this.name; }
-      set
-      {
-         if (String.IsNullOrEmpty(value))
-            throw new ArgumentException("Invalid name!");
-         this.name = value;
-      }
-   }
+    [NonSerialized] // [field: NonSerialized]
+    private int status;
 }
 ```
 
-<div class="fragment balloon" style="top:27%; left:62.59%; width:37.02%">We have only one constructor, so we cannot create person without specifying a name.</div>
-<div class="fragment balloon" style="top:66.43%; left:58.18%; width:37.91%">Incorrect name cannot be assigned</div>
+  - See the **Properties/AssemblyInfo.cs** file
 
 
 <!-- attr: { class:'slide-section demo', showInPresentation:true, hasScriptWrapper:true } -->
-<!-- # Keeping the Object State Correct
-## [Demo](https://github.com/TelerikAcademy/Object-Oriented-Programming/tree/master/Topics/01.%20Defining-Classes-Part-1/demos/Keep-the-Object-State) -->
+<!-- # Using Attributes
+## [Demo](https://github.com/TelerikAcademy/Object-Oriented-Programming/tree/master/Topics/02.%20Defining-Classes-Part-2/demos/Attributes) -->
 
 
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic42.png" style="top:52%; left:13.10%; width:28.21%; z-index:-1" /> -->
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic43.png" style="top:52%; left:4.92%; width:25.93%; z-index:-1" /> -->
-<!-- <img showInPresentation="true" class="slide-image" src="imgs/pic44.png" style="top:62%; left:47.60%; width:50.36%; z-index:-1" /> -->
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
+# Custom Attributes
+- .NET developers can define their own **custom attributes**
+  - Must inherit from `System.Attribute` class
+  - Their names must end with '`Attribute`'
+  - Possible targets must be defined via `[AttributeUsage]`
+  - Can define constructors with parameters
+  - Can define public fields and properties
+
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
+# Custom Attributes – _Example_
+
+```cs
+[AttributeUsage(AttributeTargets.Struct |
+  AttributeTargets.Class | AttributeTargets.Interface,
+  AllowMultiple = true)]
+public class AuthorAttribute : System.Attribute
+{
+  public string Name { get; private set; }
+
+  public AuthorAttribute(string name)
+  {
+    this.Name = name;
+  }
+}
+
+```
+
+_(example continues)_
+
+
+
+<!-- attr: { showInPresentation:true, hasScriptWrapper:false } -->
+<!-- # Custom Attributes –_Example_ -->
+
+```cs
+[Author("Doncho Minkov")]
+[Author("Nikolay Kostov")]
+class CustomAttributesDemo
+{
+  static void Main(string[] args)
+  {
+    Type type = typeof(CustomAttributesDemo);
+    object[] allAttributes =
+      type.GetCustomAttributes(false);
+    foreach (AuthorAttribute attr in allAttributes)
+    {
+      Console.WriteLine(
+        "This class is written by {0}. ", attr.Name);
+    }
+  }
+}
+```
+
+<!-- attr: { class:'slide-section', showInPresentation:true, hasScriptWrapper:true } -->
+<!-- # Defining, Applying and Retrieving Custom Attributes
+## [Demo](https://github.com/TelerikAcademy/Object-Oriented-Programming/tree/master/Topics/02.%20Defining-Classes-Part-2/demos/Custom-Attributes) -->
 
 
 <!-- attr: { showInPresentation:true, hasScriptWrapper:false, style:'font-size: 40px;' } -->
 # Summary
-- Classes define specific structure for objects
-  - Objects are particular instances of a class
-- Classes define fields, methods, constructors, properties and other members
-  - Access modifiers limit the access to class members
-- Constructors are invoked when creating new class instances and initialize the object's internal state
-- Enumerations define a fixed set of constants
-- Properties expose the class data in safe, controlled way
+- **Classes** define specific structure for **objects**
+  - **Objects** are particular instances of a **class**
+- **Constructors** are invoked when creating **new class** instances
+- **Properties** expose the **class data** in safe, controlled way
+- **Static** members are **shared** between all instances
+  - **Instance** members are **per object**
+- **Structures** are "value-type" classes
+- **Generics** are parameterized classes
 
 
 <!-- attr: { class:'slide-section', showInPresentation:true, hasScriptWrapper:false } -->
-<!-- # Defining Classes – Part 1
+<!-- # Defining Classes – Part 2
 ## Questions? -->
 
 
@@ -912,7 +859,7 @@ public class Person
     - [forums.academy.telerik.com](forums.academy.telerik.com)
 
 
-<!-- <img showInPresentation="false" class="slide-image" src="imgs/pic45.png" style="top:60.37%; left:92.39%; width:13.45%; z-index:-1" /> -->
-<!-- <img showInPresentation="false" class="slide-image" src="imgs/pic46.png" style="top:30.85%; left:68.14%; width:36.30%; z-index:-1" /> -->
-<!-- <img showInPresentation="false" class="slide-image" src="imgs/pic47.png" style="top:46.32%; left:95.14%; width:10.85%; z-index:-1" /> -->
-<!-- <img showInPresentation="false" class="slide-image" src="imgs/pic48.png" style="top:13.00%; left:92.85%; width:13.01%; z-index:-1" /> -->
+<!-- <img showInPresentation="false" class="slide-image" src="imgs/pic37.png" style="top:60.37%; left:92.39%; width:13.45%; z-index:-1; border-radius:10px;" /> -->
+<!-- <img showInPresentation="false" class="slide-image" src="imgs/pic38.png" style="top:30.85%; left:68.14%; width:36.30%; z-index:-1; border-radius:10px;" /> -->
+<!-- <img showInPresentation="false" class="slide-image" src="imgs/pic39.png" style="top:46.32%; left:95.14%; width:10.85%; z-index:-1; border-radius:10px;" /> -->
+<!-- <img showInPresentation="false" class="slide-image" src="imgs/pic40.png" style="top:13.00%; left:92.85%; width:13.01%; z-index:-1; border-radius:10px;" /> -->
